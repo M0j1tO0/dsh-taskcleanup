@@ -1,0 +1,27 @@
+# dsh-task-cleanup 的 bundle 挂载声明。
+#
+# DSH 启动时按 bundle 层栈叠加各插件的 patch，本文件把宿主半插入 profile 配置树。
+# 安装方式（profile 名按你自己的改，本机桌面端是 desktop）：
+#   dsh plugin --profile desktop add link:C:\Users\ASUS\Desktop\dsh-task-cleanup
+#
+# ⚠️ dryRun 默认 true：插件会统计并打印"本可以回收多少"，但**不删任何文件**。
+#    先观察几轮日志，确认命中范围符合预期，再把它改成 false。
+
+- insert:
+    - id: task-cleanup
+      name: 'dsh-task-cleanup'
+      config:
+        # 磁盘清理安全开关：true = 只统计不删除（先跑这个）
+        dryRun: true
+        # 只清 $DSH_HOME/cache 下超过该年龄的文件；默认 7 天
+        pruneCacheMaxAgeMs: 604800000
+        # ~/.dsh/cache/attachments 是会话附件，默认**不碰**（删了会让历史会话缺图）
+        includeAttachments: false
+        # 每轮结束后回收"已结算"的 job 记录（释放其输出环形缓冲）
+        removeSettledJobs: true
+        # 打印 heapUsed 前后对比（仅参考：V8 的 GC 是异步的）
+        reportHeap: true
+        # 仅当宿主以 --expose-gc 启动时才有效；默认不开
+        forceGcWhenAvailable: false
+        # 兜底周期性清理，0 = 关闭（默认只在 turn/end 触发）
+        sweepEveryMs: 0

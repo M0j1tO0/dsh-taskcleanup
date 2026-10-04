@@ -1,6 +1,3 @@
-# dsh-taskcleanup
-用于deepseek Harness插件,需要api辅助安装
-安装后可实现在每个任务完成后自动清理任务无效内存和缓存
 # dsh-task-cleanup
 
 在每个**轮次（turn）结束**后，回收任务级的内存缓存、中间态对象、定时器、已结算的 job 记录与过期磁盘缓存。
