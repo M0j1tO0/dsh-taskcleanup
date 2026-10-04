@@ -1,4 +1,4 @@
-# dsh-task-cleanup
+# dsh-task-cleanup//安装是package.json
 
 在每个**轮次（turn）结束**后，回收任务级的内存缓存、中间态对象、定时器、已结算的 job 记录与过期磁盘缓存。
 
