@@ -1,0 +1,17 @@
+{
+  "_comment": "Claude Code 兼容的 hooks 配置示例。用 dsh-hooks-claude-code 桥接挂载（见 README）。",
+  "_comment2": "钩子跑在独立子进程里，只能清磁盘/临时文件，动不了宿主内存 —— 内存类交给 lib/index.js 那个插件。",
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"C:\\Users\\ASUS\\.dsh\\dsh-runtimes\\dsh-primary-runtime\\dependencies\\node\\bin\\node.exe\" \"C:\\Users\\ASUS\\Desktop\\dsh-task-cleanup\\scripts\\cleanup-disk.mjs\" --dir \"C:\\Users\\ASUS\\.dsh\\cache\" --max-age-days 7",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}
